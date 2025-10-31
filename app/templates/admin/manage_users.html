@@ -1,0 +1,27 @@
+{% extends 'admin/manage_data_layout.html' %}
+{% block table_content %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Username</th>
+            <th>Fullname</th>
+            <th>Nickname</th>
+            <th>Score</th>
+            <th>Admin</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in data %}
+        <tr>
+            <td>{{ user.id }}</td>
+            <td>{{ user.username }}</td>
+            <td>{{ user.fullname }}</td>
+            <td>{{ user.nickname }}</td>
+            <td>{{ user.lifetime_score }}</td>
+            <td>{{ user.is_admin }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

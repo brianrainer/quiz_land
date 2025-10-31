@@ -64,5 +64,18 @@ def logout():
 def dashboard():
     return render_template("dashboard.html")
 
+@app.route("/admin/manage_user")
+@login_required
+def manage_users():
+    users = User.query.all()
+    return render_template('admin/manage_users.html', data_label="Users", data=users)
+
+@app.route("/admin/manage_subjects")
+@login_required
+def manage_subjects():
+    subjects = Subject.query.all()
+    return render_template('admin/manage_data.html', data_label="Subjects", data=subjects)
+
+
 if __name__ == "__main__":
     app.run(debug=True)
