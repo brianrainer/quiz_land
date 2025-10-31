@@ -6,9 +6,33 @@
     <link rel="stylesheet" href="style.css" />
     <title>{% block title %}{% endblock %} - Quiz Land</title>
     {% endblock %}
+
+    <style>
+        .errors li {
+            color: red;
+            font-size: 10px;
+        }
+
+        .flashes .success {
+            color: green;
+        }
+
+        .flashes .error {
+            color: red;
+        }
+    </style>
 </head>
 
 <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    <ul class=flashes>
+        {% for category, message in messages %}
+        <li class="{{ category }}">{{ message }}</li>
+        {% endfor %}
+    </ul>
+    {% endif %}
+    {% endwith %}
     <div id="header">
         <ul>
             <li><a href="{{ url_for('home') }}">Home</a></li>

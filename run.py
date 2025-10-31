@@ -1,5 +1,5 @@
 from app import create_app, db
-from flask import render_template, redirect
+from flask import render_template, redirect, flash, url_for
 from app.models import User, Subject, Quiz, QuizQuestion, QuizChoice, QuizScore
 from app.forms import RegisterForm, LoginForm
 
@@ -22,12 +22,16 @@ def about():
 def register():
     register_form = RegisterForm()
     if register_form.validate_on_submit():
-        return redirect('login')
+        flash('Registration form is validated', category='success')
+        return redirect(url_for('login'))
     return render_template("register.html", form=register_form)
 
-@app.route("/login")
+@app.route("/login", methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
+    if login_form.validate_on_submit():
+        flash('Login form is validated', category='success')
+        return redirect(url_for('dashboard'))
     return render_template("login.html", form=login_form)
 
 @app.route("/dashboard")
