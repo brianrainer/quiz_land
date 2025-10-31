@@ -4,16 +4,21 @@ from typing import Optional, List
 from app import db
 from sqlalchemy import Integer, String, ForeignKey
 from sqlalchemy.orm import Mapped, mapped_column, relationship
+from flask_login import UserMixin
+from werkzeug.security import generate_password_hash, check_password_hash
 
-class User(db.Model):
+class User(db.Model, UserMixin):
     id: Mapped[int] = mapped_column(primary_key=True)
     username: Mapped[str] = mapped_column(String(80), unique=True)
-    password: Mapped[str]
+    password_hash: Mapped[str]
     fullname: Mapped[str]
     nickname: Mapped[Optional[str]] = mapped_column(String(80))
     lifetime_score: Mapped[int] = mapped_column(insert_default=0)
 
     scores: Mapped[List["QuizScore"]] = relationship(back_populates="user", lazy=True)
+
+    def set_password(self, password):
+        self.password_hash = generate_password_hash(password)
 
 class Subject(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
@@ -37,16 +42,16 @@ class QuizQuestion(db.Model):
     question_statement: Mapped[str]
 
     quiz_id = mapped_column(ForeignKey("quiz.id"))
-    quiz: Mapped["Quiz"] = relationship(back_populates="quiz")
-    choices: Mapped[List["QuizChoice"]] = relationship(back_populates="quiz_question")
-    answer_id = mapped_column(ForeignKey("quiz_choice.id"))
+    quiz: Mapped["Quiz"] = relationship(back_populates="questions")
+    choices: Mapped[List["QuizChoice"]] = relationship(back_populates="question")
 
 class QuizChoice(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
     description: Mapped[str]
+    is_correct: Mapped[bool] = mapped_column(insert_default=False)
 
     quiz_id = mapped_column(ForeignKey("quiz_question.id"))
-    quiz_question: Mapped["QuizQuestion"] = relationship(back_populates="choices")
+    question: Mapped["QuizQuestion"] = relationship(back_populates="choices")
 
 class QuizScore(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
