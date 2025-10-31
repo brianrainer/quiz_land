@@ -1,5 +1,12 @@
+{% set role = "User" %}
+{% if current_user.is_admin %}
+{% set role = "Admin" %}
+{% endif %}
+
 {% extends "layout.html" %}
-{% block title %}Dashboard{% endblock %}
+{% block title %}{{ role }} Dashboard{% endblock %}
 {% block content %}
-<h1>Admin Dashboard</h1>
+<h1>{{ role }} Dashboard</h1>
+
+<h3>Welcome back, {{ role }} {{ current_user.fullname }}!</h3>
 {% endblock %}

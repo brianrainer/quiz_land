@@ -14,6 +14,7 @@ class User(db.Model, UserMixin):
     fullname: Mapped[str]
     nickname: Mapped[Optional[str]] = mapped_column(String(80))
     lifetime_score: Mapped[int] = mapped_column(insert_default=0)
+    is_admin: Mapped[bool] = mapped_column(insert_default=False)
 
     scores: Mapped[List["QuizScore"]] = relationship(back_populates="user", lazy=True)
 
