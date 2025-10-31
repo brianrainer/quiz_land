@@ -1,5 +1,7 @@
+from functools import wraps
+
 from flask import render_template, redirect, flash, url_for
-from flask_login import login_user, login_required, logout_user
+from flask_login import login_user, login_required, logout_user, current_user
 
 from app import create_app, db, login_manager
 from app.models import User, Subject, Quiz, QuizQuestion, QuizChoice, QuizScore
@@ -15,6 +17,14 @@ def create_db():
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
+
+def admin_role_required(func):
+    @wraps(func)
+    def decorated_view(*args, **kwargs):
+        if not current_user.is_authenticated or not current_user.is_admin:
+            return login_manager.unauthorized()
+        return func(*args, **kwargs)
+    return decorated_view
 
 @app.route("/")
 def home():
@@ -65,16 +75,32 @@ def dashboard():
     return render_template("dashboard.html")
 
 @app.route("/admin/manage_user")
+@admin_role_required
 @login_required
 def manage_users():
     users = User.query.all()
     return render_template('admin/manage_users.html', data_label="Users", data=users)
 
 @app.route("/admin/manage_subjects")
+@admin_role_required
 @login_required
 def manage_subjects():
     subjects = Subject.query.all()
-    return render_template('admin/manage_data.html', data_label="Subjects", data=subjects)
+    return render_template('admin/manage_subjects.html', data_label="Subjects", data=subjects)
+
+@app.route("/admin/manage_quiz.html")
+@admin_role_required
+@login_required
+def manage_quizzes():
+    quizzes = Quiz.query.all()
+    return render_template('admin/manage_quizzes.html', data_label="Quizzes", data=quizzes)
+
+@app.route("/admin/manage_questions.html")
+@admin_role_required
+@login_required
+def manage_questions():
+    questions = QuizQuestion.query.all()
+    return render_template('admin/manage_questions.html', data_label="Quiz Questions", data=questions)
 
 
 if __name__ == "__main__":
