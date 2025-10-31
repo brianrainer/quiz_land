@@ -1,5 +1,7 @@
-from app import create_app, db, login_manager
 from flask import render_template, redirect, flash, url_for
+from flask_login import login_user, login_required, logout_user
+
+from app import create_app, db, login_manager
 from app.models import User, Subject, Quiz, QuizQuestion, QuizChoice, QuizScore
 from app.forms import RegisterForm, LoginForm
 
@@ -12,7 +14,7 @@ def create_db():
 
 @login_manager.user_loader
 def load_user(user_id):
-    return User.get(user_id)
+    return User.query.get(int(user_id))
 
 @app.route("/")
 def home():
@@ -33,7 +35,7 @@ def register():
         new_user.set_password(register_form.password.data)
         db.session.add(new_user)
         db.session.commit()
-        flash('Registration form is validated', category='success')
+        flash('Registration successful!', category='success')
         return redirect(url_for('login'))
     return render_template("register.html", form=register_form)
 
@@ -41,11 +43,24 @@ def register():
 def login():
     login_form = LoginForm()
     if login_form.validate_on_submit():
-        flash('Login form is validated', category='success')
+        user = User.query.filter_by(username=login_form.username.data).first()
+        if user and user.check_password(login_form.password.data):
+            flash('Login successful!', category='success')
+            login_user(user)
+        else:
+            flash('Authentication failed!', category='error')
         return redirect(url_for('dashboard'))
     return render_template("login.html", form=login_form)
 
+@app.route("/logout")
+@login_required
+def logout():
+    logout_user()
+    flash('Logout successful!', category='success')
+    return redirect(url_for('home'))
+
 @app.route("/dashboard")
+@login_required
 def dashboard():
     return render_template("dashboard.html")
 
