@@ -1,0 +1,23 @@
+{% extends 'admin/manage_data_layout.html' %}
+{% block table_content %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Description</th>
+            <th>Date</th>
+            <th>Duration</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for quiz in data %}
+        <tr>
+            <td>{{ quiz.id }}</td>
+            <td>{{ quiz.description }}</td>
+            <td>{{ quiz.date_of_quiz }}</td>
+            <td>{{ quiz.duration }}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
