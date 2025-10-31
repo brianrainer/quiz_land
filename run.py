@@ -22,7 +22,8 @@ def admin_role_required(func):
     @wraps(func)
     def decorated_view(*args, **kwargs):
         if not current_user.is_authenticated or not current_user.is_admin:
-            return login_manager.unauthorized()
+            flash("You don't have permission to access that page", category="error")
+            return redirect(url_for('dashboard'))
         return func(*args, **kwargs)
     return decorated_view
 
@@ -74,28 +75,28 @@ def logout():
 def dashboard():
     return render_template("dashboard.html")
 
-@app.route("/admin/manage_user")
+@app.route("/admin/user")
 @admin_role_required
 @login_required
 def manage_users():
     users = User.query.all()
     return render_template('admin/manage_users.html', data_label="Users", data=users)
 
-@app.route("/admin/manage_subjects")
+@app.route("/admin/subject")
 @admin_role_required
 @login_required
 def manage_subjects():
     subjects = Subject.query.all()
     return render_template('admin/manage_subjects.html', data_label="Subjects", data=subjects)
 
-@app.route("/admin/manage_quiz.html")
+@app.route("/admin/quiz")
 @admin_role_required
 @login_required
 def manage_quizzes():
     quizzes = Quiz.query.all()
     return render_template('admin/manage_quizzes.html', data_label="Quizzes", data=quizzes)
 
-@app.route("/admin/manage_questions.html")
+@app.route("/admin/question")
 @admin_role_required
 @login_required
 def manage_questions():
