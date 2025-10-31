@@ -10,12 +10,17 @@
 
 <body>
     <div id="header">
-        {% block header %}{% endblock %}
+        <ul>
+            <li><a href="{{ url_for('home') }}">Home</a></li>
+            <li><a href="{{ url_for('about') }}">About</a></li>
+            <li><a href="{{ url_for('register') }}">Register</a></li>
+            <li><a href="{{ url_for('login') }}">Login</a></li>
+        </ul>
     </div>
     <div id="content">{% block content %}{% endblock %}</div>
     <div id="footer">
         {% block footer %}
-        &copy; Copyright 2025 by <a href="http://brianrainer.pythonanywhere.com/">you</a>.
+        &copy; Copyright 2025 by <a href="http://brianrainer.pythonanywhere.com/">Brian Rainer</a>.
         {% endblock %}
     </div>
 </body>
