@@ -5,7 +5,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 from app import create_app, db, login_manager
 from app.models import User, Subject, Quiz, QuizQuestion, QuizChoice, QuizScore
-from app.forms import RegisterForm, LoginForm
+from app.forms import RegisterForm, LoginForm, SubjectForm, QuizForm
 
 app = create_app()
 
@@ -88,6 +88,46 @@ def manage_users():
 def manage_subjects():
     subjects = Subject.query.all()
     return render_template('admin/manage_subjects.html', data_label="Subjects", data=subjects)
+
+@app.route("/admin/add/subject", methods=['GET', 'POST'])
+@admin_role_required
+@login_required
+def add_subject():
+    subject_form = SubjectForm()
+    if subject_form.validate_on_submit():
+        new_subject = Subject(
+            name=subject_form.name.data,
+            description=subject_form.description.data
+        )
+        db.session.add(new_subject)
+        db.session.commit()
+        flash('Subject successfully created!', category='success')
+        return redirect(url_for('manage_subjects'))
+    return render_template('admin/add_subject.html', form=subject_form)
+
+@app.route('/admin/subject/<int:subject_id>', methods=['GET', 'POST'])
+@admin_role_required
+@login_required
+def edit_subject(subject_id):
+    subject = Subject.query.get_or_404(subject_id)
+    subject_form = SubjectForm(obj=subject)
+    if subject_form.validate_on_submit():
+        subject.name = subject_form.name.data
+        subject.description = subject_form.description.data
+        db.session.commit()
+        flash('Subject successfully updated!', category='success')
+        return redirect(url_for('manage_subjects'))
+    return render_template('admin/edit_subject.html', form=subject_form, data=subject, subject_id=subject_id)
+
+@app.route('/admin/delete/subject/<int:subject_id>')
+@admin_role_required
+@login_required
+def delete_subject(subject_id):
+    subject = Subject.query.get_or_404(subject_id)
+    db.session.delete(subject)
+    db.session.commit()
+    flash('Subject successfully deleted!', category='success')
+    return redirect(url_for('manage_subjects'))
 
 @app.route("/admin/quiz")
 @admin_role_required
