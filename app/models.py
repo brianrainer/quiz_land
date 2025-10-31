@@ -26,13 +26,15 @@ class User(db.Model, UserMixin):
 
 class Subject(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    description: Mapped[str]
+    name: Mapped[str]
+    description: Mapped[Optional[str]]
 
     quizzes: Mapped[List["Quiz"]] = relationship(back_populates="subject", lazy=True)
 
 class Quiz(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)
-    description: Mapped[str]
+    name: Mapped[str]
+    description: Mapped[Optional[str]]
     date_of_quiz: Mapped[datetime]
     duration: Mapped[int]
 
