@@ -47,9 +47,9 @@ def login():
         if user and user.check_password(login_form.password.data):
             flash('Login successful!', category='success')
             login_user(user)
+            return redirect(url_for('dashboard'))
         else:
             flash('Authentication failed!', category='error')
-        return redirect(url_for('dashboard'))
     return render_template("login.html", form=login_form)
 
 @app.route("/logout")
