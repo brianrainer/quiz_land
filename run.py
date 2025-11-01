@@ -6,6 +6,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 from app import create_app, db, login_manager
 from app.models import User, Subject, Quiz, QuizQuestion, QuizScore
 from app.forms import RegisterForm, LoginForm, SubjectForm, QuizForm, QuizQuestionForm, QuizChoiceForm
+from weather import get_three_days_weather
 
 app = create_app()
 
@@ -27,9 +28,26 @@ def admin_role_required(func):
         return func(*args, **kwargs)
     return decorated_view
 
-@app.route("/")
+@app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template("home.html")
+    weather_data = None
+    city_name = ""
+    error_message = None
+
+    if request.method == 'POST':
+        # Get the city name from the submitted form data
+        city_name = request.form.get('cityName')
+        if city_name:
+            weather_data = get_three_days_weather(city_name)
+            if not weather_data:
+                error_message = f"Could not find weather data for '{city_name}'. Please try a different city."
+        else:
+            error_message = "Please enter a city name."
+
+    if error_message:
+        flash(error_message, category='error')
+    # Render the HTML template, passing the data to be displayed
+    return render_template('home.html', weather_data=weather_data)
 
 @app.route("/about")
 def about():

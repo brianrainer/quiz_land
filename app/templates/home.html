@@ -2,4 +2,38 @@
 {% block title %}Home{% endblock %}
 {% block content %}
 <h1>Welcome to the Quiz Land!</h1>
+
+<form action="{{ url_for('home' )}}" method="POST">
+    <input type="text" id="cityName" name="cityName" placeholder="City">
+    <input type="submit" value="Find">
+</form>
+
+{% if weather_data %}
+<table>
+    <thead>
+        <tr>
+            <th colspan="3">{{weather_data[0].city}}</th>
+        </tr>
+        <tr>
+            <th>Today</th>
+            <th>Tomorrow</th>
+            <th>Two Days</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            {% for weather in weather_data%}
+            <td>
+                {{ weather.date.strftime('%A') }}, {{ weather.date }}
+                <div>{{weather.main}} : {{weather.description}}</div>
+                <img src="https://openweathermap.org/img/wn/{{weather.icon}}@2x.png" alt="Icon">
+                <div>Temperature : {{weather.temperature}}&deg;C</div>
+                <div>Feels like: {{weather.feels_like}}&deg;C</div>
+            </td>
+            {% endfor %}
+        </tr>
+    </tbody>
+</table>
+{% endif %}
+
 {% endblock %}
