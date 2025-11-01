@@ -298,6 +298,11 @@ def results_by_quiz(quiz_id):
     return render_template('quiz_results.html', quiz=quiz, score=score.total_scored)
 
 
+@app.route('/leaderboard')
+def leaderboard():
+    users = User.query.order_by(User.lifetime_score.desc()).limit(10).all()
+    return render_template('leaderboard.html', users=users)
+
 
 if __name__ == "__main__":
     app.run(debug=True)

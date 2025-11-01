@@ -1,0 +1,24 @@
+{% extends 'layout.html' %}
+{% block title %}Leaderboard{% endblock %}
+{% block content %}
+<h1>Leaderboard</h1>
+
+<table>
+    <thead>
+        <tr>
+            <td>No</td>
+            <td>Name</td>
+            <td>Score</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>{{loop.index}}</td>
+            <td>{{user.fullname}}</td>
+            <td>{{user.lifetime_score}}</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}
