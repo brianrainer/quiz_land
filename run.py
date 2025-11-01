@@ -251,7 +251,7 @@ def delete_question(question_id):
     flash('Question deleted!', category='success')
     return redirect(url_for('manage_questions_by_quiz', quiz_id=quiz_id))
 
-@app.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])
+@app.route('/attempt/quiz/<int:quiz_id>', methods=['GET', 'POST'])
 @login_required
 def attempt_quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)

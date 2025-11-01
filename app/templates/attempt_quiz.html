@@ -6,7 +6,7 @@
 
 <form action="{{ url_for('attempt_quiz', quiz_id=quiz.id)}}" method="post">
     <div>
-        {% for question in questions %}
+        {% for question in quiz.questions %}
         <div>
             <h3>{{question.question_statement}}</h3>
             <h5>Choose the correct answer:</h5>

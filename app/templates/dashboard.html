@@ -51,7 +51,7 @@
                 <td>{{ quiz.date_of_quiz }}</td>
                 <td>{{ quiz.duration }}</td>
                 <td>
-                    <a href="{{ url_for('attempt_quiz', quiz_id=quiz.id, quiz=quiz)}}">Go!</a>
+                    <a href="{{ url_for('attempt_quiz', quiz_id=quiz.id)}}">Go!</a>
                 </td>
             </tr>
             {% endfor %}
