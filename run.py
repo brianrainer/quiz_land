@@ -4,7 +4,7 @@ from flask import render_template, redirect, flash, url_for
 from flask_login import login_user, login_required, logout_user, current_user
 
 from app import create_app, db, login_manager
-from app.models import User, Subject, Quiz, QuizQuestion, QuizChoice, QuizScore
+from app.models import User, Subject, Quiz, QuizQuestion, QuizScore
 from app.forms import RegisterForm, LoginForm, SubjectForm, QuizForm, QuizQuestionForm, QuizChoiceForm
 
 app = create_app()
@@ -208,7 +208,12 @@ def add_question():
     if question_form.validate_on_submit():
         new_question = QuizQuestion(
             question_statement=question_form.question_statement.data,
-            quiz_id=question_form.quiz_id.data
+            quiz_id=question_form.quiz_id.data,
+            option_1 = question_form.option_1.data,
+            option_2 = question_form.option_2.data,
+            option_3 = question_form.option_3.data,
+            option_4 = question_form.option_4.data,
+            correct_option = question_form.correct_option.data
         )
         db.session.add(new_question)
         db.session.commit()

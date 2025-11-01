@@ -30,6 +30,11 @@ class QuizForm(FlaskForm):
 class QuizQuestionForm(FlaskForm):
     question_statement = StringField('Question Statement', validators=[DataRequired()])
     quiz_id = SelectField('Quiz', coerce=int, validators=[DataRequired()])
+    option_1 = StringField('Option 1', validators=[DataRequired()])
+    option_2 = StringField('Option 2', validators=[DataRequired()])
+    option_3 = StringField('Option 3', validators=[DataRequired()])
+    option_4 = StringField('Option 4', validators=[DataRequired()])
+    correct_option = StringField('Answer', validators=[DataRequired()])
     submit = SubmitField('Submit')
 
 class QuizChoiceForm(FlaskForm):

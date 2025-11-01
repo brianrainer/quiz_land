@@ -17,6 +17,61 @@
         {% endif %}
     </div>
     <div>
+        {{ form.option_1.label }}
+        {{ form.option_1 }}
+        {% if form.option_1.errors %}
+        <ul class="errors">
+            {% for error in form.option_1.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.option_2.label }}
+        {{ form.option_2 }}
+        {% if form.option_2.errors %}
+        <ul class="errors">
+            {% for error in form.option_2.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.option_3.label }}
+        {{ form.option_3 }}
+        {% if form.option_3.errors %}
+        <ul class="errors">
+            {% for error in form.option_3.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.option_4.label }}
+        {{ form.option_4 }}
+        {% if form.option_4.errors %}
+        <ul class="errors">
+            {% for error in form.option_4.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.correct_option.label }}
+        {{ form.correct_option }}
+        {% if form.correct_option.errors %}
+        <ul class="errors">
+            {% for error in form.correct_option.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
         {{ form.quiz_id.label }}
         {{ form.quiz_id }}
         {% if form.quiz_id.errors %}

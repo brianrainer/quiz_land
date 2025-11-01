@@ -49,15 +49,12 @@ class QuizQuestion(db.Model):
 
     quiz_id = mapped_column(ForeignKey("quiz.id"))
     quiz: Mapped["Quiz"] = relationship(back_populates="questions")
-    choices: Mapped[List["QuizChoice"]] = relationship(back_populates="question")
 
-class QuizChoice(db.Model):
-    id: Mapped[int] = mapped_column(primary_key=True)
-    description: Mapped[str]
-    is_correct: Mapped[bool] = mapped_column(insert_default=False)
-
-    quiz_id = mapped_column(ForeignKey("quiz_question.id"))
-    question: Mapped["QuizQuestion"] = relationship(back_populates="choices")
+    option_1: Mapped[str]
+    option_2: Mapped[str]
+    option_3: Mapped[str]
+    option_4: Mapped[str]
+    correct_option: Mapped[str]
 
 class QuizScore(db.Model):
     id: Mapped[int] = mapped_column(primary_key=True)

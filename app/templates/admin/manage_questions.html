@@ -21,10 +21,20 @@
                 <table>
                     <tbody>
                         <tr>
-                            {% for choice in question.choices %}
-                            <td>{{ choice.description }}</td>
-                            <td>{{ choice.is_correct }}</td>
-                            {% endfor %}
+                            <td>{{ question.option_1 == question.correct_option }}</td>
+                            <td>{{ question.option_1 }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ question.option_2 == question.correct_option }}</td>
+                            <td>{{ question.option_2 }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ question.option_3 == question.correct_option }}</td>
+                            <td>{{ question.option_3 }}</td>
+                        </tr>
+                        <tr>
+                            <td>{{ question.option_4 == question.correct_option }}</td>
+                            <td>{{ question.option_4 }}</td>
                         </tr>
                     </tbody>
                 </table>
