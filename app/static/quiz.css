@@ -11,6 +11,10 @@
     color: red;
 }
 
+body {
+    padding: 25px;
+}
+
 table {
     border-collapse: collapse;
     width: 100%;

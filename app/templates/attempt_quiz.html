@@ -1,5 +1,31 @@
 {% extends 'layout.html' %}
 {% block title %} Attempt Quiz: {{ quiz.name }} {% endblock %}
+{% block head %}
+<style>
+    body {
+        padding: 25px;
+        padding-bottom: 50px;
+    }
+
+    table {
+        border-collapse: collapse;
+        width: 100%;
+        table-layout: fixed;
+    }
+
+    th {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: center;
+    }
+
+    td {
+        border: 1px solid black;
+        padding: 10px;
+        text-align: justify;
+    }
+</style>
+{% endblock %}
 {% block content %}
 
 <h2>{{quiz.name}}</h2>
@@ -13,7 +39,7 @@
         {% for question in questions %}
         <tr>
             <td>
-                <h3>{{question.question_statement}}</h3>
+                <h5>{{question.question_statement}}</h5>
             </td>
             <td>
                 <div>
