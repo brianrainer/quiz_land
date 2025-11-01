@@ -11,6 +11,7 @@
             <th>Description</th>
             <th>Date</th>
             <th>Duration</th>
+            <th>List</th>
             <th>Edit</th>
             <th>Delete</th>
         </tr>
@@ -23,6 +24,9 @@
             <td>{{ quiz.description }}</td>
             <td>{{ quiz.date_of_quiz }}</td>
             <td>{{ quiz.duration }}</td>
+            <td>
+                <a href="{{ url_for('manage_questions_by_quiz', quiz_id=quiz.id)}}">Questions</a>
+            </td>
             <td>
                 <a href="{{ url_for('edit_quiz', quiz_id=quiz.id )}}">Edit</a>
             </td>

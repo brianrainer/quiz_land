@@ -192,6 +192,13 @@ def manage_questions():
     questions = QuizQuestion.query.all()
     return render_template('admin/manage_questions.html', data_label="Quiz Questions", data=questions)
 
+@app.route("/admin/quiz/<int:quiz_id>/question")
+@admin_role_required
+@login_required
+def manage_questions_by_quiz(quiz_id):
+    questions = QuizQuestion.query.filter_by(quiz_id=quiz_id)
+    return render_template('admin/manage_questions.html', data_label='Quiz Questions', data=questions)
+
 @app.route('/admin/add/question', methods=['GET', 'POST'])
 @admin_role_required
 @login_required
@@ -209,6 +216,16 @@ def add_question():
         return redirect(url_for('manage_questions'))
     return render_template('admin/add_question.html', form=question_form)
 
+@app.route('/admin/delete/question/<int:question_id>', methods=['POST'])
+@admin_role_required
+@login_required
+def delete_question(question_id):
+    question = QuizQuestion.query.get_or_404(question_id)
+    quiz_id = question.quiz_id
+    db.session.delete(question)
+    db.session.commit()
+    flash('Question deleted!', category='success')
+    return redirect(url_for('manage_questions_by_quiz', quiz_id=quiz_id))
 
 if __name__ == "__main__":
     app.run(debug=True)
