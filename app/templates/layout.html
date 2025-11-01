@@ -19,7 +19,7 @@
 </head>
 
 <body>
-    <ul class="nav">
+    <ul class="nav justify-content-end">
         <li class="nav-item"><a class="nav-link" href="{{ url_for('home') }}">Home</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('about') }}">About</a></li>
         <li class="nav-item"><a class="nav-link" href="{{ url_for('leaderboard')}}">Leaderboard</a></li>
@@ -44,11 +44,16 @@
     {% endwith %}
 
     <div id="content">{% block content %}{% endblock %}</div>
-    <div id="footer">
-        {% block footer %}
-        &copy; Copyright 2025 by <a href="http://brianrainer.pythonanywhere.com/">Brian Rainer</a>.
-        {% endblock %}
-    </div>
+
+    <footer class="fixed-bottom bg-dark text-white">
+        <div class="container">
+            <p class="text-center">&copy;Copyright 2025 by
+                <a href="http://brianrainer.pythonanywhere.com/">
+                    Brian Rainer
+                </a>
+            </p>
+        </div>
+    </footer>
 
     <!-- Optional JavaScript -->
     <!-- jQuery first, then Popper.js, then Bootstrap JS -->
