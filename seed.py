@@ -195,6 +195,130 @@ QUIZ_COMPUTER_VISION_QUESTIONS = [
     }
 ]
 
+QUIZ_DATA_AI_PYTHON_QUESTIONS = [
+    {
+      "id": 21,
+      "question": "Which Python library is fundamental for high-performance numerical operations, especially vector and matrix manipulation, crucial for efficient AI computation?",
+      "options": ["Pandas", "Matplotlib", "NumPy", "SciPy"],
+      "correct_answer": "NumPy"
+    },
+    {
+      "id": 22,
+      "question": "In the Pandas library, what is the most common function used to handle missing values by filling them with a specified value (like the mean or median)?",
+      "options": ["df.drop()", "df.replace()", "df.fillna()", "df.impute()"],
+      "correct_answer": "df.fillna()"
+    },
+    {
+      "id": 23,
+      "question": "Which specific function within the scikit-learn module is used to split a dataset into training and testing subsets?",
+      "options": ["train_test_split", "data_splitter", "model_selector", "cross_validate"],
+      "correct_answer": "train_test_split"
+    },
+    {
+      "id": 24,
+      "question": "When defining an Artificial Neural Network in Keras, which layer type is used to connect every input node to every output node, often placed near the output layer?",
+      "options": ["Convolutional", "Pooling", "Dropout", "Dense"],
+      "correct_answer": "Dense"
+    },
+    {
+      "id": 25,
+      "question": "What is the high-level API for building and training deep learning models, often integrated into TensorFlow, known for its user-friendliness and rapid prototyping?",
+      "options": ["PyTorch Lightning", "Scikit-learn", "Keras", "Theano"],
+      "correct_answer": "Keras"
+    },
+    {
+      "id": 26,
+      "question": "In deep learning optimization using Python, which parameter controls the size of the step taken in the direction of the negative gradient, influencing how quickly or slowly the model learns?",
+      "options": ["Batch Size", "Epoch", "Momentum", "Learning Rate"],
+      "correct_answer": "Learning Rate"
+    },
+    {
+      "id": 27,
+      "question": "What is the primary purpose of the **validation set** during the neural network training loop?",
+      "options": ["To tune the final model hyperparameters before deployment.", "To train the model's weights and biases.", "To provide an unbiased evaluation of the final model.", "To monitor model performance and prevent overfitting during training."],
+      "correct_answer": "To monitor model performance and prevent overfitting during training."
+    },
+    {
+      "id": 28,
+      "question": "Which unsupervised learning algorithm, implemented in `sklearn.cluster`, requires the user to pre-define the number of groups (k)?",
+      "options": ["DBSCAN", "Isolation Forest", "K-Means", "Principal Component Analysis"],
+      "correct_answer": "K-Means"
+    },
+    {
+      "id": 29,
+      "question": "When using Pandas for feature engineering, which method is typically used to convert categorical string data (like 'Red', 'Blue') into numerical columns (e.g., 0s and 1s)?",
+      "options": ["df.map()", "df.apply()", "pd.get_dummies()", "df.astype(int)"],
+      "correct_answer": "pd.get_dummies()"
+    },
+    {
+      "id": 30,
+      "question": "Which Python library is commonly used for creating static, interactive, and animated visualizations, essential for exploring and communicating AI data insights?",
+      "options": ["Seaborn", "Plotly", "Matplotlib", "Bokeh"],
+      "correct_answer": "Matplotlib"
+    },
+    {
+      "id": 31,
+      "question": "In scikit-learn's linear models (like Lasso or Ridge), what is the main goal of adding a regularization term to the loss function?",
+      "options": ["To speed up the training process.", "To increase the model's complexity.", "To prevent overfitting by penalizing large coefficients.", "To handle missing data points."],
+      "correct_answer": "To prevent overfitting by penalizing large coefficients."
+    },
+    {
+      "id": 32,
+      "question": "Which Python library is most focused on natural language processing (NLP), providing tools for tokenization, stemming, and classification?",
+      "options": ["Pandas", "Scikit-learn", "NLTK (Natural Language Toolkit)", "OpenCV"],
+      "correct_answer": "NLTK (Natural Language Toolkit)"
+    },
+    {
+      "id": 33,
+      "question": "Which type of neural network is primarily used in Python for tasks involving sequential data, such as time series prediction or natural language translation?",
+      "options": ["CNN (Convolutional Neural Network)", "Autoencoder", "Fully Connected Network", "RNN (Recurrent Neural Network)"],
+      "correct_answer": "RNN (Recurrent Neural Network)"
+    },
+    {
+      "id": 34,
+      "question": "What is a **Tensor** in the context of TensorFlow or PyTorch?",
+      "options": ["A simple Python list used for storing data.", "A variable containing the learning rate.", "A specific type of activation function.", "The fundamental data structure (multi-dimensional array) used for all operations."],
+      "correct_answer": "The fundamental data structure (multi-dimensional array) used for all operations."
+    },
+    {
+      "id": 35,
+      "question": "Which Python module is most commonly used to save and load trained machine learning models (e.g., scikit-learn or Keras models) to disk for later use?",
+      "options": ["csv", "json", "pickle / joblib", "io"],
+      "correct_answer": "pickle / joblib"
+    },
+    {
+      "id": 36,
+      "question": "What is the purpose of **k-fold cross-validation** in scikit-learn?",
+      "options": ["To train the model once on the entire dataset.", "To select the best features for the model.", "To obtain a more robust estimate of the model's performance by training and testing on different subsets.", "To scale the features to a common range."],
+      "correct_answer": "To obtain a more robust estimate of the model's performance by training and testing on different subsets."
+    },
+    {
+      "id": 37,
+      "question": "Which metric measures the proportion of *positive* predictions that were *actually correct*, answering the question: 'Of all the times we said yes, how many times were we right?'",
+      "options": ["Recall (Sensitivity)", "F1-Score", "Specificity", "Precision"],
+      "correct_answer": "Precision"
+    },
+    {
+      "id": 38,
+      "question": "Which scikit-learn technique is used to reduce the number of features in a dataset while retaining most of the variance by projecting the data onto a lower-dimensional subspace?",
+      "options": ["Linear Regression", "K-Means", "PCA (Principal Component Analysis)", "Gradient Boosting"],
+      "correct_answer": "PCA (Principal Component Analysis)"
+    },
+    {
+      "id": 39,
+      "question": "In the context of supervised learning with Python, what does the term **'epoch'** refer to in model training?",
+      "options": ["The size of the batch of data processed at once.", "A single forward and backward pass of the entire training dataset.", "The total number of parameters in the network.", "The process of monitoring the validation loss."],
+      "correct_answer": "A single forward and backward pass of the entire training dataset."
+    },
+    {
+      "id": 40,
+      "question": "Which Python library is the standard open-source tool for real-time computer vision tasks like image manipulation, video analysis, and object tracking, often imported as `cv2`?",
+      "options": ["Scikit-image", "PIL (Pillow)", "OpenCV (cv2)", "Matplotlib"],
+      "correct_answer": "OpenCV (cv2)"
+    }
+]
+
+
 ATTEMPTS_DATA = [
     {
         "user_id": 1,
@@ -250,6 +374,21 @@ def seed_data():
 
     for q in QUIZ_COMPUTER_VISION_QUESTIONS:
         quiz_id = 1
+        new_question = QuizQuestion(
+            id=q['id'],
+            quiz_id=quiz_id,
+            question_statement=q['question'],
+            option_1=q['options'][0],
+            option_2=q['options'][1],
+            option_3=q['options'][2],
+            option_4=q['options'][3],
+            correct_option=q['correct_answer']
+        )
+        db.session.add(new_question)
+    db.session.commit()
+
+    for q in QUIZ_DATA_AI_PYTHON_QUESTIONS:
+        quiz_id = 2
         new_question = QuizQuestion(
             id=q['id'],
             quiz_id=quiz_id,
