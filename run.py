@@ -1,6 +1,6 @@
 from functools import wraps
 
-from flask import render_template, redirect, flash, url_for
+from flask import render_template, redirect, flash, url_for, request
 from flask_login import login_user, login_required, logout_user, current_user
 
 from app import create_app, db, login_manager
@@ -73,7 +73,8 @@ def logout():
 @app.route("/dashboard")
 @login_required
 def dashboard():
-    return render_template("dashboard.html")
+    quizzes = Quiz.query.all()
+    return render_template("dashboard.html", quizzes=quizzes)
 
 @app.route("/admin/user")
 @admin_role_required
@@ -231,6 +232,50 @@ def delete_question(question_id):
     db.session.commit()
     flash('Question deleted!', category='success')
     return redirect(url_for('manage_questions_by_quiz', quiz_id=quiz_id))
+
+@app.route('/quiz/<int:quiz_id>', methods=['GET', 'POST'])
+@login_required
+def attempt_quiz(quiz_id):
+    quiz = Quiz.query.get_or_404(quiz_id)
+    questions = quiz.questions
+    total_questions = len(questions)
+
+    if request.method == "POST":
+        correct = 0
+        for question in questions:
+            user_answer = request.form.get(f'question_{question.id}')
+            if user_answer and user_answer == question.correct_option:
+                correct += 1
+        
+        total_scored = (correct // total_questions) * 100
+
+        previous_score = QuizScore.query.filter_by(
+            user_id=current_user.id,
+            quiz_id=quiz_id
+        ).first()
+        if not previous_score:
+            user_score = QuizScore(
+                total_scored=total_scored,
+                quiz_id=quiz_id,
+                user_id=current_user.id
+            )
+            db.session.add(user_score)
+        else:
+            previous_score.total_scored = max(previous_score.total_scored, total_scored)
+        db.session.commit()
+        flash(f'Your score is: {total_scored}', category='success')
+        return redirect(url_for('results_by_quiz', quiz_id=quiz_id))
+    return render_template('attempt_quiz.html', quiz_id=quiz_id, quiz=quiz)
+
+
+@app.route('/results/quiz/<int:quiz_id>')
+@login_required
+def results_by_quiz(quiz_id):
+    quiz = Quiz.query.get_or_404(quiz_id)
+    score = QuizScore.query.filter_by(user_id=current_user.id, quiz_id=quiz_id).first()
+    return render_template('quiz_results.html', quiz=quiz, score=score)
+
+
 
 if __name__ == "__main__":
     app.run(debug=True)

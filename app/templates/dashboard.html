@@ -31,4 +31,33 @@
 </div>
 {% endif %}
 
+<div>
+    <h3>Attempt any quiz based on your interest from the list:</h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Description</th>
+                <th>Date</th>
+                <th>Duration</th>
+                <th>Attempt</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for quiz in quizzes %}
+            <tr>
+                <td>{{ quiz.name }}</td>
+                <td>{{ quiz.description }}</td>
+                <td>{{ quiz.date_of_quiz }}</td>
+                <td>{{ quiz.duration }}</td>
+                <td>
+                    <a href="{{ url_for('attempt_quiz', quiz_id=quiz.id, quiz=quiz)}}">Go!</a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+
 {% endblock %}
