@@ -7,6 +7,7 @@ from app import create_app, db, login_manager
 from app.models import User, Subject, Quiz, QuizQuestion, QuizScore
 from app.forms import RegisterForm, LoginForm, SubjectForm, QuizForm, QuizQuestionForm, QuizChoiceForm
 from weather import get_three_days_weather
+from seed import seed_data
 
 app = create_app()
 
@@ -14,6 +15,13 @@ app = create_app()
 def create_db():
     db.create_all()
     print("Database created!")
+
+
+@app.cli.command('db-seed')
+def seed_db():
+    seed_data()
+    print('Database seeded!')
+
 
 @login_manager.user_loader
 def load_user(user_id):
