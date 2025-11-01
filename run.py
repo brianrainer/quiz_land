@@ -119,7 +119,7 @@ def edit_subject(subject_id):
         return redirect(url_for('manage_subjects'))
     return render_template('admin/edit_subject.html', form=subject_form, data=subject, subject_id=subject_id)
 
-@app.route('/admin/delete/subject/<int:subject_id>')
+@app.route('/admin/delete/subject/<int:subject_id>', methods=['POST'])
 @admin_role_required
 @login_required
 def delete_subject(subject_id):
@@ -175,7 +175,7 @@ def edit_quiz(quiz_id):
         return redirect(url_for('manage_quizzes'))
     return render_template('admin/edit_quiz.html', form=quiz_form, data=quiz, quiz_id=quiz_id)
 
-@app.route('/admin/delete/quiz/<int:quiz_id>')
+@app.route('/admin/delete/quiz/<int:quiz_id>', methods=['POST'])
 @admin_role_required
 @login_required
 def delete_quiz(quiz_id):
