@@ -19,6 +19,9 @@
 <h1>{{ role }} Dashboard</h1>
 
 <h3>Welcome back, {{ role }} {{ current_user.fullname }}!</h3>
+<p>
+    Your Lifetime Score is: {{current_user.lifetime_score}}
+</p>
 
 {% if current_user.is_admin %}
 <div class="sidebar">

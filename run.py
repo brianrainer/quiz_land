@@ -272,25 +272,19 @@ def attempt_quiz(quiz_id):
             user_answer = request.form.get(f'question_{question.id}')
             if user_answer and user_answer == question.correct_option:
                 correct += 1
-        
-        total_scored = (correct // total_questions) * 100
+        total_scored = (correct * 100 // total_questions)
 
-        previous_score = QuizScore.query.filter_by(
-            user_id=current_user.id,
-            quiz_id=quiz_id
-        ).first()
-        if not previous_score:
-            user_score = QuizScore(
-                total_scored=total_scored,
-                quiz_id=quiz_id,
-                user_id=current_user.id
-            )
-            db.session.add(user_score)
-        else:
-            previous_score.total_scored = max(previous_score.total_scored, total_scored)
+        user_score = QuizScore(
+            total_scored=total_scored,
+            quiz_id=quiz_id,
+            user_id=current_user.id
+        )
+        db.session.add(user_score)
+
+        current_user.lifetime_score += total_scored
         db.session.commit()
         flash(f'Your score is: {total_scored}', category='success')
-        return redirect(url_for('results_by_quiz', quiz_id=quiz_id))
+        return render_template('quiz_results.html', quiz=quiz, score=total_scored)
     return render_template('attempt_quiz.html', quiz_id=quiz_id, quiz=quiz)
 
 
@@ -298,8 +292,8 @@ def attempt_quiz(quiz_id):
 @login_required
 def results_by_quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
-    score = QuizScore.query.filter_by(user_id=current_user.id, quiz_id=quiz_id).first()
-    return render_template('quiz_results.html', quiz=quiz, score=score)
+    score = QuizScore.query.filter_by(user_id=current_user.id, quiz_id=quiz_id).order_by(QuizScore.created_at.desc()).first()
+    return render_template('quiz_results.html', quiz=quiz, score=score.total_scored)
 
 
 
