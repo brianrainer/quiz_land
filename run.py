@@ -1,3 +1,4 @@
+import random
 from functools import wraps
 
 from flask import render_template, redirect, flash, url_for, request
@@ -263,7 +264,8 @@ def delete_question(question_id):
 @login_required
 def attempt_quiz(quiz_id):
     quiz = Quiz.query.get_or_404(quiz_id)
-    questions = quiz.questions
+    questions = quiz.questions.copy()
+    random.shuffle(questions)
     total_questions = len(questions)
 
     if request.method == "POST":
@@ -285,7 +287,7 @@ def attempt_quiz(quiz_id):
         db.session.commit()
         flash(f'Your score is: {total_scored}', category='success')
         return render_template('quiz_results.html', quiz=quiz, score=total_scored)
-    return render_template('attempt_quiz.html', quiz_id=quiz_id, quiz=quiz)
+    return render_template('attempt_quiz.html', quiz_id=quiz_id, quiz=quiz, questions=questions)
 
 
 @app.route('/results/quiz/<int:quiz_id>')
