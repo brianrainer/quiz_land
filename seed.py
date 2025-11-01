@@ -16,14 +16,16 @@ USERS_DATA = [
         "username": "john@quizland.com",
         "password": "superman123",
         "fullname": "John Smith",
-        "nickname": "John"
+        "nickname": "John",
+        "is_admin": False
     },
     {
         "id": 3,
         "username": "jane@quizland.com",
         "password": "ilovebanana",
         "fullname": "Jane Doe",
-        "nickname": "Jane"
+        "nickname": "Jane",
+        "is_admin": False
     }
 ]
 
@@ -318,6 +320,129 @@ QUIZ_DATA_AI_PYTHON_QUESTIONS = [
     }
 ]
 
+QUIZ_DATA_NLP = [
+    {
+      "id": 41,
+      "question": "In NLP, what is the term for the process of breaking a text stream into smaller meaningful units, such as words, punctuation, or subwords?",
+      "options": ["Lemmatization", "Stemming", "Tokenization", "Parsing"],
+      "correct_answer": "Tokenization"
+    },
+    {
+      "id": 42,
+      "question": "What common text pre-processing step involves reducing an inflected word to its root or base form (e.g., 'running' to 'run'), often using simple suffix stripping?",
+      "options": ["Stemming", "Named Entity Recognition", "Lemmatization", "Syntactic Analysis"],
+      "correct_answer": "Stemming"
+    },
+    {
+      "id": 43,
+      "question": "Which specific technique is used to remove common, high-frequency words that carry little semantic meaning (like 'the', 'a', 'is') from a text corpus?",
+      "options": ["Part-of-Speech Tagging", "Stop Word Removal", "Chunking", "Bag-of-Words Model"],
+      "correct_answer": "Stop Word Removal"
+    },
+    {
+      "id": 44,
+      "question": "What is the goal of **Named Entity Recognition (NER)**?",
+      "options": ["To classify a document by topic.", "To identify and categorize proper nouns (like people, places, organizations).", "To determine the sentiment (positive/negative) of a text.", "To convert text into a vector space model."],
+      "correct_answer": "To identify and categorize proper nouns (like people, places, organizations)."
+    },
+    {
+      "id": 45,
+      "question": "Which model represents text as an unordered collection of words, disregarding grammar and word order, only keeping track of word frequency?",
+      "options": ["Transformer Model", "N-gram Model", "Recurrent Neural Network", "Bag-of-Words Model"],
+      "correct_answer": "Bag-of-Words Model"
+    },
+    {
+      "id": 46,
+      "question": "What is the name of the statistical measure used to evaluate the importance of a word in a document relative to a corpus, based on term frequency and inverse document frequency?",
+      "options": ["Word2Vec", "TF-IDF (Term Frequency-Inverse Document Frequency)", "Cosine Similarity", "Perplexity"],
+      "correct_answer": "TF-IDF (Term Frequency-Inverse Document Frequency)"
+    },
+    {
+      "id": 47,
+      "question": "Which architecture introduced the concept of **attention mechanisms** to weigh the importance of different words in a sequence, revolutionizing sequence-to-sequence tasks like machine translation?",
+      "options": ["Long Short-Term Memory (LSTM)", "Convolutional Neural Network (CNN)", "Recurrent Neural Network (RNN)", "Transformer"],
+      "correct_answer": "Transformer"
+    },
+    {
+      "id": 48,
+      "question": "The task of determining the intended meaning of an ambiguous word based on its context (e.g., 'bank' as a financial institution or river edge) is known as:",
+      "options": ["Syntactic Parsing", "Text Summarization", "Word Sense Disambiguation (WSD)", "Coreference Resolution"],
+      "correct_answer": "Word Sense Disambiguation (WSD)"
+    },
+    {
+      "id": 49,
+      "question": "What is a **Word Embedding**?",
+      "options": ["A text file containing common English words.", "A matrix that stores the results of sentiment analysis.", "A dense, low-dimensional vector representation of a word's meaning.", "A set of rules for grammatical correctness."],
+      "correct_answer": "A dense, low-dimensional vector representation of a word's meaning."
+    },
+    {
+      "id": 50,
+      "question": "Which pre-trained language model, developed by Google, is famous for using a **bidirectional** training approach to learn context from both the left and right sides of a word simultaneously?",
+      "options": ["GPT-3", "BERT (Bidirectional Encoder Representations from Transformers)", "Word2Vec", "ELMo (Embeddings from Language Models)"],
+      "correct_answer": "BERT (Bidirectional Encoder Representations from Transformers)"
+    },
+    {
+      "id": 51,
+      "question": "In the context of evaluating a language model, what does **Perplexity** measure?",
+      "options": ["The model's speed in generating text.", "How well the model can generalize to unseen vocabulary.", "How confident the model is in its own predictions (lower is better).", "The model's ability to handle multiple languages."],
+      "correct_answer": "How confident the model is in its own predictions (lower is better)."
+    },
+    {
+      "id": 52,
+      "question": "The task of automatically generating a concise and coherent summary of a longer text is called:",
+      "options": ["Machine Translation", "Topic Modeling", "Text Summarization", "Question Answering"],
+      "correct_answer": "Text Summarization"
+    },
+    {
+      "id": 53,
+      "question": "Which sub-task of NLP is concerned with analyzing the grammatical structure of sentences to define relationships between words (e.g., Subject, Object)?",
+      "options": ["Lexical Analysis", "Sentiment Analysis", "Syntactic Parsing", "Pragmatic Analysis"],
+      "correct_answer": "Syntactic Parsing"
+    },
+    {
+      "id": 54,
+      "question": "The **BLEU Score** is a common metric used in NLP to evaluate the quality of which specific task?",
+      "options": ["Part-of-Speech Tagging", "Text Classification", "Machine Translation", "Named Entity Recognition"],
+      "correct_answer": "Machine Translation"
+    },
+    {
+      "id": 55,
+      "question": "Which recurrent architecture was introduced specifically to solve the vanishing gradient problem in standard RNNs by using gates (Input, Forget, Output)?",
+      "options": ["Transformer", "Perceptron", "LSTM (Long Short-Term Memory)", "Simple RNN"],
+      "correct_answer": "LSTM (Long Short-Term Memory)"
+    },
+    {
+      "id": 56,
+      "question": "What is **Coreference Resolution**?",
+      "options": ["Identifying the primary subject of a paragraph.", "Determining if two documents are about the same topic.", "Finding all expressions that refer to the same entity in a text.", "Analyzing the emotional tone of a sentence."],
+      "correct_answer": "Finding all expressions that refer to the same entity in a text."
+    },
+    {
+      "id": 57,
+      "question": "Which classification task involves identifying and extracting subjective information from source materials, typically categorizing opinions as positive, negative, or neutral?",
+      "options": ["Topic Modeling", "Information Retrieval", "Text Generation", "Sentiment Analysis"],
+      "correct_answer": "Sentiment Analysis"
+    },
+    {
+      "id": 58,
+      "question": "In the context of language model training, what is **Fine-Tuning**?",
+      "options": ["Training a model from scratch with a small dataset.", "Using a pre-trained model and continuing to train it on a smaller, task-specific dataset.", "Adjusting the model's hyper-parameters without changing the weights.", "Removing unnecessary layers from a deep neural network."],
+      "correct_answer": "Using a pre-trained model and continuing to train it on a smaller, task-specific dataset."
+    },
+    {
+      "id": 59,
+      "question": "What kind of NLP model is typically used for **Topic Modeling**, where the goal is to discover abstract 'topics' that occur in a collection of documents?",
+      "options": ["Sequence-to-Sequence (Seq2Seq)", "Latent Dirichlet Allocation (LDA)", "Conditional Random Field (CRF)", "Support Vector Machine (SVM)"],
+      "correct_answer": "Latent Dirichlet Allocation (LDA)"
+    },
+    {
+      "id": 60,
+      "question": "In the process of **Tokenization**, what term refers to combining frequent sequences of characters into a single token, which helps handle out-of-vocabulary words in large models like BERT and GPT?",
+      "options": ["WordPiece (Subword Tokenization)", "Chunking", "Phoneme Mapping", "Lexical Simplification"],
+      "correct_answer": "WordPiece (Subword Tokenization)"
+    }
+]
+
 
 ATTEMPTS_DATA = [
     {
@@ -343,7 +468,8 @@ def seed_data():
         new_user = User(
             id=user['id'],
             username=user['username'],
-            fullname=user['fullname']
+            fullname=user['fullname'],
+            is_admin=user['is_admin']
         )
         new_user.set_password(user['password'])
         db.session.add(new_user)
@@ -389,6 +515,21 @@ def seed_data():
 
     for q in QUIZ_DATA_AI_PYTHON_QUESTIONS:
         quiz_id = 2
+        new_question = QuizQuestion(
+            id=q['id'],
+            quiz_id=quiz_id,
+            question_statement=q['question'],
+            option_1=q['options'][0],
+            option_2=q['options'][1],
+            option_3=q['options'][2],
+            option_4=q['options'][3],
+            correct_option=q['correct_answer']
+        )
+        db.session.add(new_question)
+    db.session.commit()
+
+    for q in QUIZ_DATA_NLP:
+        quiz_id = 3
         new_question = QuizQuestion(
             id=q['id'],
             quiz_id=quiz_id,
