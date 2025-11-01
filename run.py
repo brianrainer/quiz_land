@@ -136,6 +136,55 @@ def manage_quizzes():
     quizzes = Quiz.query.all()
     return render_template('admin/manage_quizzes.html', data_label="Quizzes", data=quizzes)
 
+@app.route('/admin/add/quiz', methods=['GET', 'POST'])
+@admin_role_required
+@login_required
+def add_quiz():
+    quiz_form = QuizForm()
+    quiz_form.subject_id.choices = [(s.id, s.name) for s in Subject.query.all()]
+    if quiz_form.validate_on_submit():
+        new_quiz = Quiz(
+            name=quiz_form.name.data,
+            description=quiz_form.description.data,
+            date_of_quiz=quiz_form.date_of_quiz.data,
+            duration=quiz_form.duration.data,
+            subject_id=quiz_form.subject_id.data
+        )
+        db.session.add(new_quiz)
+        db.session.commit()
+        flash('Quiz successfully created!', category='success')
+        return redirect(url_for('manage_quizzes'))
+    return render_template('admin/add_quiz.html', form=quiz_form)
+
+
+@app.route('/admin/quiz/<int:quiz_id>', methods=['GET', 'POST'])
+@admin_role_required
+@login_required
+def edit_quiz(quiz_id):
+    quiz = Quiz.query.get_or_404(quiz_id)
+    quiz_form = QuizForm(obj=quiz)
+    quiz_form.subject_id.choices = [(s.id, s.name) for s in Subject.query.all()]
+    if quiz_form.validate_on_submit():
+        quiz.name = quiz_form.name.data
+        quiz.description = quiz_form.description.data
+        quiz.date_of_quiz = quiz_form.date_of_quiz.data
+        quiz.duration = quiz_form.duration.data
+        quiz.subject_id = quiz_form.subject_id.data
+        db.session.commit()
+        flash('Quiz updated!', category='success')
+        return redirect(url_for('manage_quizzes'))
+    return render_template('admin/edit_quiz.html', form=quiz_form, data=quiz, quiz_id=quiz_id)
+
+@app.route('/admin/delete/quiz/<int:quiz_id>')
+@admin_role_required
+@login_required
+def delete_quiz(quiz_id):
+    quiz = Quiz.query.get_or_404(quiz_id)
+    db.session.delete(quiz)
+    db.session.commit()
+    flash('Quiz deleted!', category='success')
+    return redirect(url_for('manage_quizzes'))
+
 @app.route("/admin/question")
 @admin_role_required
 @login_required

@@ -1,0 +1,68 @@
+{% set data_label = 'Quiz' %}
+
+{% extends 'admin/manage_data_layout.html' %}
+{% block table_content %}
+
+<form action="{{ url_for('add_quiz' )}}" method="post">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.name.label }}
+        {{ form.name }}
+        {% if form.name.errors %}
+        <ul class="errors">
+            {% for error in form.name.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.description.label }}
+        {{ form.description }}
+        {% if form.description.errors %}
+        <ul class="errors">
+            {% for error in form.description.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.date_of_quiz.label }}
+        {{ form.date_of_quiz }}
+        {% if form.date_of_quiz.errors %}
+        <ul class="errors">
+            {% for error in form.date_of_quiz.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.duration.label }}
+        {{ form.duration }}
+        {% if form.duration.errors %}
+        <ul class="errors">
+            {% for error in form.duration.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.subject_id.label }}
+        {{ form.subject_id }}
+        {% if form.subject_id.errors %}
+        <ul class="errors">
+            {% for error in form.subject_id.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.submit }}
+    </div>
+</form>
+
+{% endblock %}
