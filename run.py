@@ -5,7 +5,7 @@ from flask_login import login_user, login_required, logout_user, current_user
 
 from app import create_app, db, login_manager
 from app.models import User, Subject, Quiz, QuizQuestion, QuizChoice, QuizScore
-from app.forms import RegisterForm, LoginForm, SubjectForm, QuizForm
+from app.forms import RegisterForm, LoginForm, SubjectForm, QuizForm, QuizQuestionForm, QuizChoiceForm
 
 app = create_app()
 
@@ -191,6 +191,23 @@ def delete_quiz(quiz_id):
 def manage_questions():
     questions = QuizQuestion.query.all()
     return render_template('admin/manage_questions.html', data_label="Quiz Questions", data=questions)
+
+@app.route('/admin/add/question', methods=['GET', 'POST'])
+@admin_role_required
+@login_required
+def add_question():
+    question_form = QuizQuestionForm()
+    question_form.quiz_id.choices = [(q.id, q.name) for q in Quiz.query.all()]
+    if question_form.validate_on_submit():
+        new_question = QuizQuestion(
+            question_statement=question_form.question_statement.data,
+            quiz_id=question_form.quiz_id.data
+        )
+        db.session.add(new_question)
+        db.session.commit()
+        flash('Question created!', category='success')
+        return redirect(url_for('manage_questions'))
+    return render_template('admin/add_question.html', form=question_form)
 
 
 if __name__ == "__main__":

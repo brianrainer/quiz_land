@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, IntegerField, DateTimeLocalField
+from wtforms import StringField, PasswordField, SubmitField, TextAreaField, SelectField, IntegerField, DateTimeLocalField, BooleanField
 from wtforms.validators import Email, Length, EqualTo, DataRequired
 
 class RegisterForm(FlaskForm):
@@ -25,4 +25,14 @@ class QuizForm(FlaskForm):
     date_of_quiz = DateTimeLocalField('Date of Quiz', validators=[DataRequired()])
     duration = IntegerField('Time Duration (in seconds)', validators=[DataRequired()])
     subject_id = SelectField('Subject', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class QuizQuestionForm(FlaskForm):
+    question_statement = StringField('Question Statement', validators=[DataRequired()])
+    quiz_id = SelectField('Quiz', coerce=int, validators=[DataRequired()])
+    submit = SubmitField('Submit')
+
+class QuizChoiceForm(FlaskForm):
+    description = StringField('Description', validators=[DataRequired()])
+    is_correct = BooleanField('Is Correct', default=False)
     submit = SubmitField('Submit')

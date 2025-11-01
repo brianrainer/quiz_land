@@ -1,0 +1,35 @@
+{% set data_label = 'Quiz Question' %}
+
+{% extends 'admin/manage_data_layout.html' %}
+{% block table_content %}
+
+<form action="{{ url_for('add_question' )}}" method="post">
+    {{ form.hidden_tag() }}
+    <div>
+        {{ form.question_statement.label }}
+        {{ form.question_statement }}
+        {% if form.question_statement.errors %}
+        <ul class="errors">
+            {% for error in form.question_statement.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.quiz_id.label }}
+        {{ form.quiz_id }}
+        {% if form.quiz_id.errors %}
+        <ul class="errors">
+            {% for error in form.quiz_id.errors %}
+            <li>{{ error }}</li>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+    <div>
+        {{ form.submit }}
+    </div>
+</form>
+
+{% endblock %}
