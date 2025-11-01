@@ -1,0 +1,30 @@
+.errors li {
+    color: red;
+    font-size: 10px;
+}
+
+.flashes .success {
+    color: green;
+}
+
+.flashes .error {
+    color: red;
+}
+
+table {
+    border-collapse: collapse;
+    width: 100%;
+    table-layout: fixed;
+}
+
+th {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: center;
+}
+
+td {
+    border: 1px solid black;
+    padding: 10px;
+    text-align: justify;
+}
